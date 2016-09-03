@@ -11,6 +11,7 @@
 #include <TimeLib.h>
 #include <Adafruit_NeoPixel.h>
 #include <EEPROM.h>
+#include <Scheduler.h>
 
 #include "config.h"
 #include "DataStore.h"
@@ -36,22 +37,19 @@ void setup() {
     printWiFiInfo();
 
     DataStore.begin();
-    WebServer.begin(WEBSERVER_DOMAIN);
     Geolocation.begin();
     InternetTime.begin(TIME_SERVER, SYNC_INTERVAL);
-    ClockDisplay.begin();
 
-    Serial.println("Ready");
+    Scheduler.start(&web_server_task);
+    Scheduler.start(&clock_display_task);
+
+    Serial.println("Ready. Starting scheduler.");
+
+    Scheduler.begin();
 }
 
-void loop() {
-
-    printHeapSpace();
-
-    ClockDisplay.update();
-    
-    WebServer.handleClients();
-}
+// Dummy - handled by scheduler
+void loop() { }
 
 /**
  * Prints the ESP8266's MAC address for reference.
@@ -82,18 +80,4 @@ void printWiFiInfo() {
 
     Serial.print("Signal strength (RSSI): ");
     Serial.println(WiFi.RSSI());
-}
-
-/**
- * Prints the amount of free heap space left if it's changed since last printed.
- */
-void printHeapSpace() {
-
-    static int lastSize = 0;
-    int currentSize = ESP.getFreeHeap();
-    if (currentSize != lastSize) {
-        lastSize = currentSize;
-        Serial.print("Heap: ");
-        Serial.println(currentSize);
-    }
 }

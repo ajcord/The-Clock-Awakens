@@ -2,10 +2,10 @@
 #include "DataStore.h"
 #include "FS.h"
 
-WebServerClass::WebServerClass()
-    : server(80) { }
+WebServerTask::WebServerTask(const char* domain)
+    : Task(), server(80), domain(domain) { }
 
-void WebServerClass::begin(const char* domain) {
+void WebServerTask::setup() {
 
     mdns.begin(domain, WiFi.localIP());
 
@@ -39,12 +39,12 @@ void WebServerClass::begin(const char* domain) {
     Serial.println("Web server is running at http://" + String(domain) + ".local");
 }
 
-void WebServerClass::handleClients() {
+void WebServerTask::loop() {
 
     server.handleClient();
 }
 
-bool WebServerClass::parse(String key, String value) {
+bool WebServerTask::parse(String key, String value) {
 
     DSKey newKey;
 
@@ -107,7 +107,7 @@ bool WebServerClass::parse(String key, String value) {
     return DataStore.set(newKey, newVal);
 }
 
-void WebServerClass::handleSettingsSave() {
+void WebServerTask::handleSettingsSave() {
 
     // Keeps track whether any of the settings failed
     bool isSuccess = true;
@@ -125,7 +125,7 @@ void WebServerClass::handleSettingsSave() {
     server.send(302);
 }
 
-void WebServerClass::handleSettingsGet() {
+void WebServerTask::handleSettingsGet() {
 
     String json = "{";
     
@@ -150,7 +150,7 @@ void WebServerClass::handleSettingsGet() {
     server.send(200, "application/json", json);
 }
 
-String WebServerClass::getColorCode(int value) {
+String WebServerTask::getColorCode(int value) {
 
     String s = String(value, HEX);
     String hexString = "\"#";
@@ -166,18 +166,18 @@ String WebServerClass::getColorCode(int value) {
     return hexString;
 }
 
-void WebServerClass::handleReset() {
+void WebServerTask::handleReset() {
 
     server.send(200, "text/plain", "OK");
     Serial.println("System is going down for reset now!");
     ESP.restart();
 }
 
-void WebServerClass::handleResetSettings() {
+void WebServerTask::handleResetSettings() {
 
     DataStore.resetSettings();
     server.send(200, "text/plain", "OK");
     Serial.println("Settings reset");
 }
 
-WebServerClass WebServer;
+WebServerTask web_server_task(WEBSERVER_DOMAIN);

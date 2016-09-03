@@ -42,10 +42,10 @@ bool gammaValidator(DSKey key, int value) {
     return (f > 0);
 }
 
-ClockDisplayClass::ClockDisplayClass(int numPixels, int pin, int settings)
-    : pixels(numPixels, pin, settings) { }
+ClockDisplayTask::ClockDisplayTask()
+    : pixels(NEOPIXELS_NUM, NEOPIXELS_PIN, NEO_GRB + NEO_KHZ800) { }
 
-void ClockDisplayClass::begin() {
+void ClockDisplayTask::setup() {
 
     pixels.begin();
 
@@ -61,7 +61,7 @@ void ClockDisplayClass::begin() {
     DataStore.registerValidator(DS_GAMMA, &gammaValidator);
 }
 
-void ClockDisplayClass::update() {
+void ClockDisplayTask::loop() {
 
     time_t t = now();
 
@@ -72,7 +72,7 @@ void ClockDisplayClass::update() {
     displayTime(t);
 }
 
-void ClockDisplayClass::displayTime(time_t t) {
+void ClockDisplayTask::displayTime(time_t t) {
 
     printTime(t);
 
@@ -94,7 +94,7 @@ void ClockDisplayClass::displayTime(time_t t) {
     }
 }
 
-void ClockDisplayClass::discreteAnimation(time_t t) {
+void ClockDisplayTask::discreteAnimation(time_t t) {
 
     static int lastSecond = -1;
 
@@ -133,7 +133,7 @@ void ClockDisplayClass::discreteAnimation(time_t t) {
     lastSecond = currentSecond;
 }
 
-void ClockDisplayClass::continuousAnimation(time_t t) {
+void ClockDisplayTask::continuousAnimation(time_t t) {
 
     static int lastSecond = -1;
     static unsigned long lastAbsoluteMillis = 0;
@@ -206,7 +206,7 @@ void ClockDisplayClass::continuousAnimation(time_t t) {
     lastAbsoluteMillis = currentAbsoluteMillis;
 }
 
-void ClockDisplayClass::barAnimation(time_t t) {
+void ClockDisplayTask::barAnimation(time_t t) {
 
     static int lastMinute = -1;
 
@@ -241,7 +241,7 @@ void ClockDisplayClass::barAnimation(time_t t) {
     lastMinute = currentMinute;
 }
 
-void ClockDisplayClass::printTime(time_t t) {
+void ClockDisplayTask::printTime(time_t t) {
 
     static int lastSecond = -1;
 
@@ -260,7 +260,7 @@ void ClockDisplayClass::printTime(time_t t) {
     lastSecond = currentSecond;
 }
 
-void ClockDisplayClass::updateNightMode(time_t t) {
+void ClockDisplayTask::updateNightMode(time_t t) {
 
     static int lastSecond = 0;
 
@@ -301,7 +301,7 @@ void ClockDisplayClass::updateNightMode(time_t t) {
     lastSecond = currentSecond;
 }
 
-uint32_t ClockDisplayClass::addColors(uint32_t a, uint32_t b) {
+uint32_t ClockDisplayTask::addColors(uint32_t a, uint32_t b) {
 
     uint8_t red = std::min(EXTRACT_RED(a) + EXTRACT_RED(b), (uint32_t)0xff);
     uint8_t green = std::min(EXTRACT_GREEN(a) + EXTRACT_GREEN(b), (uint32_t)0xff);
@@ -310,7 +310,7 @@ uint32_t ClockDisplayClass::addColors(uint32_t a, uint32_t b) {
     return pixels.Color(red, green, blue);
 }
 
-uint32_t ClockDisplayClass::scaleColor(uint32_t color, float scale) {
+uint32_t ClockDisplayTask::scaleColor(uint32_t color, float scale) {
 
     uint8_t red = constrain(scale * EXTRACT_RED(color), 0, 255);
     uint8_t green = constrain(scale * EXTRACT_GREEN(color), 0, 255);
@@ -319,7 +319,7 @@ uint32_t ClockDisplayClass::scaleColor(uint32_t color, float scale) {
     return pixels.Color(red, green, blue);
 }
 
-void ClockDisplayClass::setBrightness(int unscaledBrightness) {
+void ClockDisplayTask::setBrightness(int unscaledBrightness) {
 
     // Make sure input is valid
     if (!brightnessValidator(DS_BRIGHTNESS, unscaledBrightness)) {
@@ -330,7 +330,7 @@ void ClockDisplayClass::setBrightness(int unscaledBrightness) {
     brightness = unscaledBrightness / 100.0;
 }
 
-uint8_t ClockDisplayClass::gamma(uint8_t x) {
+uint8_t ClockDisplayTask::gamma(uint8_t x) {
 
     // See https://learn.adafruit.com/led-tricks-gamma-correction/the-issue
     int i = DataStore.get(DS_GAMMA);
@@ -338,7 +338,7 @@ uint8_t ClockDisplayClass::gamma(uint8_t x) {
     return (uint8_t)(0.5 + 255.0 * pow(x / 255.0, gamma));
 }
 
-uint32_t ClockDisplayClass::perceived(uint32_t color) {
+uint32_t ClockDisplayTask::perceived(uint32_t color) {
 
     color = scaleColor(color, brightness);
 
@@ -349,4 +349,4 @@ uint32_t ClockDisplayClass::perceived(uint32_t color) {
     return pixels.Color(red, green, blue);
 }
 
-ClockDisplayClass ClockDisplay(NEOPIXELS_NUM, NEOPIXELS_PIN, NEO_GRB + NEO_KHZ800);
+ClockDisplayTask clock_display_task;

@@ -2,6 +2,7 @@
 
 #include <TimeLib.h>
 #include <Adafruit_NeoPixel.h>
+#include <Scheduler.h>
 
 /**
  * Represents the various animations.
@@ -18,30 +19,14 @@ enum Animation {
 /**
  * Displays data on the clock.
  */
-class ClockDisplayClass {
+class ClockDisplayTask : public Task {
 
 public:
 
     /**
-     * Constructs a new ClockDisplayClass.
-     * 
-     * @param[in] numPixels The number of NeoPixels connected
-     * @param[in] pin The pin the NeoPixels are connected to
-     * @param[in] settings The NeoPixel settings
+     * Constructs a new ClockDisplayTask.
      */
-    ClockDisplayClass(int numPixels, int pin, int settings);
-
-    /**
-     * Initializes the clock display.
-     */
-    void begin();
-
-    /**
-     * Updates the clock face with the current time.
-     * 
-     * @note Run frequently inside loop()
-     */
-    void update();
+    ClockDisplayTask();
 
     /**
      * Displays the time on the clock face.
@@ -56,6 +41,17 @@ public:
      * @param[in]  unscaledBrightness   The new brightness value between 1 and 100
      */
     void setBrightness(int unscaledBrightness);
+
+protected:
+    /**
+     * Initializes the clock display.
+     */
+    void setup();
+
+    /**
+     * Updates the clock face with the current time.
+     */
+    void loop();
 
 private:
 
@@ -75,4 +71,4 @@ private:
     float brightness;
 };
 
-extern ClockDisplayClass ClockDisplay;
+extern ClockDisplayTask clock_display_task;
