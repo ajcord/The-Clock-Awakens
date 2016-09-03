@@ -63,12 +63,13 @@ void printMacAddress() {
     unsigned char mac[WL_MAC_ADDR_LENGTH];
     WiFi.macAddress(mac);
 
-    for (int i = WL_MAC_ADDR_LENGTH - 1; i > 0; i--) {
+    int i;
+    for (i = 0; i < WL_MAC_ADDR_LENGTH - 1; i++) {
         Serial.print(mac[i], HEX);
         Serial.print(":");
     }
 
-    Serial.println(mac[0], HEX);
+    Serial.println(mac[i], HEX);
 }
 
 /**
