@@ -204,7 +204,7 @@ time_t InternetTimeClass::parseResponse(ntp_packet_t & packet,
     lastSyncTime = currentTime;
 
     // For the highest accuracy, wait until the second is just changing
-    // before returning the time since it gets rounded to seconds by Time.h
+    // before returning the time since it gets rounded to seconds by TimeLib.h
     uint64_t timeElapsed = getNtpTimestamp() - clientReceiveTime;
     uint64_t timeSinceSecondStarted = (currentTime + timeElapsed) & 0xFFFFFFFF;
     uint64_t timeLeftInSecond = 0x100000000 - timeSinceSecondStarted;
