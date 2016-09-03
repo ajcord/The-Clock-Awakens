@@ -7,6 +7,8 @@
 #include <ESP8266mDNS.h>
 #include <Scheduler.h>
 
+#include "config.h"
+
 /**
  * Manages the web server.
  */
@@ -47,3 +49,5 @@ private:
     ESP8266WebServer server;
 
 };
+
+extern WebServerTask web_server_task;

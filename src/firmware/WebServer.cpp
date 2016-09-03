@@ -179,3 +179,5 @@ void WebServerTask::handleResetSettings() {
     server.send(200, "text/plain", "OK");
     Serial.println("Settings reset");
 }
+
+WebServerTask web_server_task(WEBSERVER_DOMAIN);

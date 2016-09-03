@@ -348,3 +348,5 @@ uint32_t ClockDisplayTask::perceived(uint32_t color) {
 
     return pixels.Color(red, green, blue);
 }
+
+ClockDisplayTask clock_display_task;

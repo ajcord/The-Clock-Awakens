@@ -40,10 +40,7 @@ void setup() {
     Geolocation.begin();
     InternetTime.begin(TIME_SERVER, SYNC_INTERVAL);
 
-    WebServerTask web_server_task(WEBSERVER_DOMAIN);
     Scheduler.start(&web_server_task);
-
-    ClockDisplayTask clock_display_task;
     Scheduler.start(&clock_display_task);
 
     Serial.println("Ready. Starting scheduler.");

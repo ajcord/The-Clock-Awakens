@@ -70,3 +70,5 @@ private:
     Adafruit_NeoPixel pixels;
     float brightness;
 };
+
+extern ClockDisplayTask clock_display_task;
