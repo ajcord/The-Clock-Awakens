@@ -275,10 +275,11 @@ void ClockDisplayClass::updateNightMode(time_t t) {
     time_t sunsetTime = Geolocation.getSunsetTime();
 
     int timeSinceSunrise = (t - sunriseTime);
-    int timeSinceSunset = (t - sunsetTime);
+    int timeUntilSunset = (sunsetTime - t);
 
     int dayBrightness = DataStore.get(DS_BRIGHTNESS);
     int nightBrightness = DataStore.get(DS_NIGHT_MODE_BRIGHTNESS);
+    
     int newBrightness = dayBrightness;
 
     if (t < sunriseTime || t > sunsetTime) {
@@ -290,9 +291,9 @@ void ClockDisplayClass::updateNightMode(time_t t) {
         newBrightness = slope * timeSinceSunrise + nightBrightness;
     }
 
-    if (timeSinceSunset >= 0 && timeSinceSunset <= FADE_TIME) {
+    if (timeUntilSunset >= 0 && timeUntilSunset <= FADE_TIME) {
         float slope = (nightBrightness - dayBrightness) / (float)FADE_TIME;
-        newBrightness = slope * timeSinceSunset + dayBrightness;
+        newBrightness = slope * (FADE_TIME - timeUntilSunset) + dayBrightness;
     }
 
     setBrightness(newBrightness);
