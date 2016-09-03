@@ -5,32 +5,33 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
+#include <Scheduler.h>
 
 /**
  * Manages the web server.
  */
-class WebServerClass {
-    
+class WebServerTask : public Task {
+
 public:
     
     /**
-     * Constructs a new WebServerClass.
-     */
-    WebServerClass();
-
-    /**
-     * Initializes the store and web server.
+     * Constructs a new WebServerTask.
      * 
      * @param[in] domain        The domain that the server will be available it
      */
-    void begin(const char* domain);
+    WebServerTask(const char* domain);
+    
+protected:
+
+    /**
+     * Initializes the store and web server.
+     */
+    void setup();
 
     /**
      * Handles incoming connections.
-     * 
-     * @note     Call this inside loop()
      */
-    void handleClients();
+    void loop();
 
 private:
 
@@ -41,10 +42,8 @@ private:
     void handleResetSettings();
     String getColorCode(int value);
 
-
+    const char* domain;
     MDNSResponder mdns;
     ESP8266WebServer server;
 
 };
-
-extern WebServerClass WebServer;
