@@ -13832,11 +13832,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="H2" library="holes" deviceset="MOUNT-PAD-SQUARE" device="2.8"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="D1" library="diode" deviceset="1N581*" device="" technology="7-B"/>
+<part name="P+4" library="supply1" deviceset="VCC" device=""/>
+<part name="R7" library="rcl" deviceset="R-US_" device="0207/10" value="10K"/>
+<part name="C5" library="rcl" deviceset="C-US" device="025-025X050" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="114.3" y="40.64" size="1.27" layer="97" align="center">Hold button at reset to enter
+<text x="78.74" y="33.02" size="1.27" layer="97" align="center-left">Hold button at reset to enter
 programming mode</text>
 <text x="157.48" y="114.3" size="1.27" layer="97" align="center">5V to 3.3V voltage divider</text>
 <text x="220.98" y="106.68" size="1.27" layer="97" align="center">3.3V to 5V level shifter</text>
@@ -13870,15 +13873,18 @@ programming mode</text>
 <instance part="GND7" gate="1" x="154.94" y="66.04"/>
 <instance part="IC1" gate="G$1" x="220.98" y="91.44"/>
 <instance part="GND8" gate="1" x="198.12" y="78.74"/>
-<instance part="S1" gate="G$1" x="99.06" y="35.56"/>
+<instance part="S1" gate="G$1" x="73.66" y="33.02" rot="R270"/>
 <instance part="GND9" gate="1" x="35.56" y="25.4"/>
-<instance part="GND10" gate="1" x="111.76" y="30.48"/>
-<instance part="P+3" gate="VCC" x="91.44" y="53.34"/>
-<instance part="R6" gate="G$1" x="91.44" y="43.18" rot="R90"/>
+<instance part="GND10" gate="1" x="73.66" y="22.86"/>
+<instance part="P+3" gate="VCC" x="73.66" y="58.42"/>
+<instance part="R6" gate="G$1" x="73.66" y="48.26" rot="R90"/>
 <instance part="H1" gate="G$1" x="177.8" y="162.56"/>
 <instance part="H2" gate="G$1" x="177.8" y="154.94"/>
 <instance part="GND11" gate="1" x="170.18" y="149.86"/>
 <instance part="D1" gate="G$1" x="43.18" y="58.42"/>
+<instance part="P+4" gate="VCC" x="121.92" y="60.96"/>
+<instance part="R7" gate="G$1" x="121.92" y="50.8" rot="R90"/>
+<instance part="C5" gate="G$1" x="121.92" y="38.1"/>
 </instances>
 <busses>
 </busses>
@@ -13943,7 +13949,12 @@ programming mode</text>
 <segment>
 <pinref part="P+3" gate="VCC" pin="VCC"/>
 <pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="91.44" y1="50.8" x2="91.44" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="55.88" x2="73.66" y2="53.34" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="P+4" gate="VCC" pin="VCC"/>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="121.92" y1="58.42" x2="121.92" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -14015,8 +14026,7 @@ programming mode</text>
 </segment>
 <segment>
 <pinref part="S1" gate="G$1" pin="3"/>
-<wire x1="104.14" y1="35.56" x2="111.76" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="111.76" y1="35.56" x2="111.76" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="27.94" x2="73.66" y2="25.4" width="0.1524" layer="91"/>
 <pinref part="GND10" gate="1" pin="GND"/>
 </segment>
 <segment>
@@ -14058,6 +14068,12 @@ programming mode</text>
 <pinref part="JP1" gate="A" pin="6"/>
 <wire x1="43.18" y1="43.18" x2="35.56" y2="43.18" width="0.1524" layer="91"/>
 <label x="35.56" y="43.18" size="1.27" layer="95" rot="MR0" xref="yes"/>
+</segment>
+<segment>
+<pinref part="C5" gate="G$1" pin="2"/>
+<wire x1="121.92" y1="33.02" x2="121.92" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="30.48" x2="119.38" y2="30.48" width="0.1524" layer="91"/>
+<label x="119.38" y="30.48" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="RXD_3V3" class="0">
@@ -14107,17 +14123,6 @@ programming mode</text>
 <wire x1="210.82" y1="93.98" x2="213.36" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$2" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="CH_PD"/>
-<pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="81.28" y1="96.52" x2="93.98" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="RST"/>
-<wire x1="81.28" y1="101.6" x2="93.98" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="101.6" x2="93.98" y2="96.52" width="0.1524" layer="91"/>
-<junction x="93.98" y="96.52"/>
-</segment>
-</net>
 <net name="N$3" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="1"/>
@@ -14144,12 +14149,12 @@ programming mode</text>
 </segment>
 <segment>
 <pinref part="S1" gate="G$1" pin="1"/>
-<wire x1="93.98" y1="35.56" x2="91.44" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="35.56" x2="86.36" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="35.56" x2="91.44" y2="38.1" width="0.1524" layer="91"/>
-<junction x="91.44" y="35.56"/>
+<wire x1="73.66" y1="38.1" x2="73.66" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="40.64" x2="81.28" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="40.64" x2="73.66" y2="43.18" width="0.1524" layer="91"/>
+<junction x="73.66" y="40.64"/>
 <pinref part="R6" gate="G$1" pin="1"/>
-<label x="86.36" y="35.56" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="81.28" y="40.64" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="+5V_FTDI" class="0">
@@ -14162,6 +14167,29 @@ programming mode</text>
 <wire x1="40.64" y1="58.42" x2="38.1" y2="58.42" width="0.1524" layer="91"/>
 <label x="38.1" y="58.42" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="D1" gate="G$1" pin="A"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="R2" gate="G$1" pin="1"/>
+<pinref part="U1" gate="G$1" pin="CH_PD"/>
+<wire x1="81.28" y1="96.52" x2="93.98" y2="96.52" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="RESET" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="RST"/>
+<wire x1="81.28" y1="101.6" x2="83.82" y2="101.6" width="0.1524" layer="91"/>
+<label x="83.82" y="101.6" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="121.92" y1="40.64" x2="121.92" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="121.92" y1="43.18" x2="121.92" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="43.18" x2="129.54" y2="43.18" width="0.1524" layer="91"/>
+<junction x="121.92" y="43.18"/>
+<label x="129.54" y="43.18" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
