@@ -13708,6 +13708,78 @@ Source: http://products.nichicon.co.jp/en/pdf/XJA043/e-ud.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="diode">
+<description>&lt;b&gt;Diodes&lt;/b&gt;&lt;p&gt;
+Based on the following sources:
+&lt;ul&gt;
+&lt;li&gt;Motorola : www.onsemi.com
+&lt;li&gt;Fairchild : www.fairchildsemi.com
+&lt;li&gt;Philips : www.semiconductors.com
+&lt;li&gt;Vishay : www.vishay.de
+&lt;/ul&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="DO41-10">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 2.54 mm, horizontal, grid 10.16 mm</description>
+<wire x1="2.032" y1="-1.27" x2="-2.032" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="-1.27" x2="2.032" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="1.27" x2="2.032" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="1.27" x2="-2.032" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0" x2="4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<pad name="A" x="5.08" y="0" drill="1.1176"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176"/>
+<text x="-2.032" y="1.651" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.032" y="-2.794" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.651" y1="-1.27" x2="-1.143" y2="1.27" layer="21"/>
+<rectangle x1="2.032" y1="-0.381" x2="3.937" y2="0.381" layer="21"/>
+<rectangle x1="-3.937" y1="-0.381" x2="-2.032" y2="0.381" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="D">
+<wire x1="-1.27" y1="-1.27" x2="1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="1.27" y2="-1.27" width="0.254" layer="94"/>
+<text x="2.54" y="0.4826" size="1.778" layer="95">&gt;NAME</text>
+<text x="2.54" y="-2.3114" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="A" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+<pin name="C" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+<text x="-2.54" y="0" size="0.4064" layer="99" align="center">SpiceOrder 1</text>
+<text x="2.54" y="0" size="0.4064" layer="99" align="center">SpiceOrder 2</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="1N4004" prefix="D">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+general purpose rectifier, 1 A</description>
+<gates>
+<gate name="1" symbol="D" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DO41-10">
+<connects>
+<connect gate="1" pin="A" pad="A"/>
+<connect gate="1" pin="C" pad="C"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13752,6 +13824,7 @@ Source: http://products.nichicon.co.jp/en/pdf/XJA043/e-ud.pdf</description>
 <part name="H1" library="holes" deviceset="MOUNT-PAD-ROUND" device="2.8" value="MOUNT-PAD-ROUND2.8"/>
 <part name="H2" library="holes" deviceset="MOUNT-PAD-SQUARE" device="2.8"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
+<part name="D1" library="diode" deviceset="1N4004" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -13769,7 +13842,7 @@ programming mode</text>
 <instance part="U2" gate="G$1" x="60.96" y="149.86"/>
 <instance part="GND1" gate="1" x="60.96" y="137.16"/>
 <instance part="P+1" gate="VCC" x="78.74" y="154.94"/>
-<instance part="P+2" gate="VCC" x="83.82" y="111.76"/>
+<instance part="P+2" gate="VCC" x="109.22" y="111.76"/>
 <instance part="GND2" gate="1" x="83.82" y="83.82"/>
 <instance part="C1" gate="G$1" x="45.72" y="144.78"/>
 <instance part="C2" gate="G$1" x="76.2" y="144.78"/>
@@ -13798,6 +13871,7 @@ programming mode</text>
 <instance part="H1" gate="G$1" x="177.8" y="162.56"/>
 <instance part="H2" gate="G$1" x="177.8" y="154.94"/>
 <instance part="GND11" gate="1" x="170.18" y="149.86"/>
+<instance part="D1" gate="1" x="43.18" y="58.42"/>
 </instances>
 <busses>
 </busses>
@@ -13811,11 +13885,6 @@ programming mode</text>
 <junction x="45.72" y="149.86"/>
 <pinref part="CN1" gate="G$1" pin="PWR"/>
 <wire x1="25.4" y1="149.86" x2="45.72" y2="149.86" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="JP1" gate="A" pin="3"/>
-<wire x1="43.18" y1="35.56" x2="35.56" y2="35.56" width="0.1524" layer="91"/>
-<label x="35.56" y="35.56" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
 <segment>
 <pinref part="C4" gate="G$1" pin="+"/>
@@ -13835,6 +13904,11 @@ programming mode</text>
 <wire x1="175.26" y1="162.56" x2="170.18" y2="162.56" width="0.1524" layer="91"/>
 <junction x="175.26" y="162.56"/>
 </segment>
+<segment>
+<pinref part="D1" gate="1" pin="C"/>
+<wire x1="45.72" y1="58.42" x2="55.88" y2="58.42" width="0.1524" layer="91"/>
+<label x="55.88" y="58.42" size="1.27" layer="95" xref="yes"/>
+</segment>
 </net>
 <net name="VCC" class="0">
 <segment>
@@ -13850,11 +13924,10 @@ programming mode</text>
 <segment>
 <pinref part="U1" gate="G$1" pin="VCC"/>
 <pinref part="P+2" gate="VCC" pin="VCC"/>
-<wire x1="81.28" y1="106.68" x2="83.82" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="83.82" y1="106.68" x2="83.82" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="106.68" x2="109.22" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="109.22" y1="106.68" x2="109.22" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="C3" gate="G$1" pin="1"/>
-<wire x1="83.82" y1="106.68" x2="104.14" y2="106.68" width="0.1524" layer="91"/>
-<junction x="83.82" y="106.68"/>
+<junction x="109.22" y="106.68"/>
 <pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="104.14" y1="106.68" x2="109.22" y2="106.68" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="96.52" x2="104.14" y2="106.68" width="0.1524" layer="91"/>
@@ -14070,6 +14143,18 @@ programming mode</text>
 <junction x="91.44" y="35.56"/>
 <pinref part="R6" gate="G$1" pin="1"/>
 <label x="86.36" y="35.56" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="+5V_FTDI" class="0">
+<segment>
+<pinref part="JP1" gate="A" pin="3"/>
+<wire x1="43.18" y1="35.56" x2="35.56" y2="35.56" width="0.1524" layer="91"/>
+<label x="35.56" y="35.56" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="D1" gate="1" pin="A"/>
+<wire x1="40.64" y1="58.42" x2="38.1" y2="58.42" width="0.1524" layer="91"/>
+<label x="38.1" y="58.42" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
