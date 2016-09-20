@@ -13811,15 +13811,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="CN1" library="adafruit" deviceset="DCBARREL" device="PTH"/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
-<part name="R1" library="rcl" deviceset="R-US_" device="0207/10" value="470"/>
+<part name="R1" library="rcl" deviceset="R-US_" device="0204/5" value="470"/>
 <part name="C4" library="rcl" deviceset="CPOL-US" device="E3.5-8" value="1000uF"/>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="JP2" library="pinhead" deviceset="PINHD-1X2" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
-<part name="R2" library="rcl" deviceset="R-US_" device="0207/10" value="10K"/>
-<part name="R3" library="rcl" deviceset="R-US_" device="0207/10" value="470"/>
-<part name="R4" library="rcl" deviceset="R-US_" device="0207/10" value="470"/>
-<part name="R5" library="rcl" deviceset="R-US_" device="0207/10" value="470"/>
+<part name="R2" library="rcl" deviceset="R-US_" device="0204/5" value="10K"/>
+<part name="R3" library="rcl" deviceset="R-US_" device="0204/5" value="1.8K"/>
+<part name="R4" library="rcl" deviceset="R-US_" device="0204/5" value="3.3K"/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="IC1" library="ic-package" deviceset="DIL14" device="" value="74AHCT125"/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
@@ -13827,19 +13826,22 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
-<part name="R6" library="rcl" deviceset="R-US_" device="0207/10" value="10K"/>
+<part name="R6" library="rcl" deviceset="R-US_" device="0204/5" value="10K"/>
 <part name="H1" library="holes" deviceset="MOUNT-PAD-ROUND" device="2.8" value="MOUNT-PAD-ROUND2.8"/>
 <part name="H2" library="holes" deviceset="MOUNT-PAD-SQUARE" device="2.8"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="D1" library="diode" deviceset="1N581*" device="" technology="7-B"/>
 <part name="P+4" library="supply1" deviceset="VCC" device=""/>
-<part name="R7" library="rcl" deviceset="R-US_" device="0207/10" value="10K"/>
+<part name="R7" library="rcl" deviceset="R-US_" device="0204/5" value="10K"/>
 <part name="C5" library="rcl" deviceset="C-US" device="025-025X050" value="0.1uF"/>
+<part name="R5" library="rcl" deviceset="R-US_" device="0204/5" value="1.8K"/>
+<part name="R8" library="rcl" deviceset="R-US_" device="0204/5" value="3.3K"/>
+<part name="GND12" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="78.74" y="33.02" size="1.27" layer="97" align="center-left">Hold button at reset to enter
+<text x="73.66" y="17.78" size="1.27" layer="97" align="center">Hold button at reset to enter
 programming mode</text>
 <text x="157.48" y="114.3" size="1.27" layer="97" align="center">5V to 3.3V voltage divider</text>
 <text x="220.98" y="106.68" size="1.27" layer="97" align="center">3.3V to 5V level shifter</text>
@@ -13869,8 +13871,7 @@ programming mode</text>
 <instance part="R2" gate="G$1" x="99.06" y="96.52"/>
 <instance part="R3" gate="G$1" x="154.94" y="101.6" rot="R90"/>
 <instance part="R4" gate="G$1" x="154.94" y="86.36" rot="R90"/>
-<instance part="R5" gate="G$1" x="154.94" y="76.2" rot="R90"/>
-<instance part="GND7" gate="1" x="154.94" y="66.04"/>
+<instance part="GND7" gate="1" x="154.94" y="76.2"/>
 <instance part="IC1" gate="G$1" x="220.98" y="91.44"/>
 <instance part="GND8" gate="1" x="198.12" y="78.74"/>
 <instance part="S1" gate="G$1" x="73.66" y="33.02" rot="R270"/>
@@ -13885,6 +13886,9 @@ programming mode</text>
 <instance part="P+4" gate="VCC" x="121.92" y="60.96"/>
 <instance part="R7" gate="G$1" x="121.92" y="50.8" rot="R90"/>
 <instance part="C5" gate="G$1" x="121.92" y="38.1"/>
+<instance part="R5" gate="G$1" x="111.76" y="38.1" rot="R90"/>
+<instance part="R8" gate="G$1" x="111.76" y="22.86" rot="R90"/>
+<instance part="GND12" gate="1" x="111.76" y="12.7"/>
 </instances>
 <busses>
 </busses>
@@ -14006,9 +14010,9 @@ programming mode</text>
 <pinref part="GND6" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="R5" gate="G$1" pin="1"/>
 <pinref part="GND7" gate="1" pin="GND"/>
-<wire x1="154.94" y1="71.12" x2="154.94" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="81.28" x2="154.94" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="R4" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="1"/>
@@ -14036,6 +14040,11 @@ programming mode</text>
 <pinref part="GND11" gate="1" pin="GND"/>
 <pinref part="H2" gate="G$1" pin="MOUNT"/>
 <junction x="175.26" y="154.94"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="1"/>
+<pinref part="GND12" gate="1" pin="GND"/>
+<wire x1="111.76" y1="15.24" x2="111.76" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="TXD_5V" class="0">
@@ -14070,10 +14079,10 @@ programming mode</text>
 <label x="35.56" y="43.18" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
 <segment>
-<pinref part="C5" gate="G$1" pin="2"/>
-<wire x1="121.92" y1="33.02" x2="121.92" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="121.92" y1="30.48" x2="119.38" y2="30.48" width="0.1524" layer="91"/>
-<label x="119.38" y="30.48" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="111.76" y1="45.72" x2="106.68" y2="45.72" width="0.1524" layer="91"/>
+<label x="106.68" y="45.72" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="R5" gate="G$1" pin="2"/>
+<wire x1="111.76" y1="45.72" x2="111.76" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="RXD_3V3" class="0">
@@ -14121,12 +14130,6 @@ programming mode</text>
 <label x="210.82" y="93.98" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="IC1" gate="G$1" pin="3"/>
 <wire x1="210.82" y1="93.98" x2="213.36" y2="93.98" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="R4" gate="G$1" pin="1"/>
-<pinref part="R5" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="GPIO2" class="0">
@@ -14190,6 +14193,18 @@ programming mode</text>
 <wire x1="121.92" y1="43.18" x2="129.54" y2="43.18" width="0.1524" layer="91"/>
 <junction x="121.92" y="43.18"/>
 <label x="129.54" y="43.18" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="N$2" class="0">
+<segment>
+<pinref part="R5" gate="G$1" pin="1"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="111.76" y1="27.94" x2="111.76" y2="30.48" width="0.1524" layer="91"/>
+<pinref part="C5" gate="G$1" pin="2"/>
+<wire x1="111.76" y1="30.48" x2="111.76" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="30.48" x2="121.92" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="30.48" x2="121.92" y2="33.02" width="0.1524" layer="91"/>
+<junction x="111.76" y="30.48"/>
 </segment>
 </net>
 </nets>
